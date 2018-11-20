@@ -15,14 +15,15 @@ function parsed = parser(arr,tempo)
     
     for ii = 1:length(arr(2,:))
         if(length(arr(2,ii)) == 1)
-            arr(2,ii) = {arr{2,ii}*ones(size(arr{1,ii}))};
+            arr(2,ii) = {arr{2,ii}.*ones(size(arr{1,ii}))};
         end
     end
     
-    for ii = 1:length(arr(3,:))
-        %check tempo calculation
-        arr(3,ii) = {(240/tempo)*(1./arr{3,ii})};
-    end
+    arr(3,:) = cellfun(@(x)((240/tempo)*(1./x)),arr(3,:),'un',0);
+%     for ii = 1:length(arr(3,:))
+%         %check tempo calculation
+%         arr(3,ii) = {(240/tempo)*(1./arr{3,ii})};
+%     end
     
     %based on player, may not be nessary
 %     for ii = 1:length(arr(4,:))
